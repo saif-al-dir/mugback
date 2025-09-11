@@ -32,7 +32,8 @@ exports.AppModule = AppModule = __decorate([
                     if (!match) {
                         throw new Error('Invalid DATABASE_URL format');
                     }
-                    const [, username, password, host, port, database] = match;
+                    const [, username, encodedPassword, host, port, database] = match;
+                    const password = decodeURIComponent(encodedPassword);
                     return {
                         type: 'mysql',
                         host,

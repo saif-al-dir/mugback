@@ -13,8 +13,8 @@ import { AuthModule } from './auth/auth.module';
       useFactory: () => {
         const dbUrl = process.env.DATABASE_URL;
         if (!dbUrl) {
-    throw new Error('DATABASE_URL environment variable is not set');
-  }
+          throw new Error('DATABASE_URL environment variable is not set');
+        }
         // Parse DATABASE_URL manually or use a library
         // DATABASE_URL format: mysql://user:password@host:port/dbname
         const regex = /mysql:\/\/(.*):(.*)@(.*):(\d+)\/(.*)/;
@@ -22,7 +22,8 @@ import { AuthModule } from './auth/auth.module';
         if (!match) {
           throw new Error('Invalid DATABASE_URL format');
         }
-        const [, username, password, host, port, database] = match;
+        const [, username, encodedPassword, host, port, database] = match;
+        const password = decodeURIComponent(encodedPassword);
         return {
           type: 'mysql',
           host,
