@@ -18,6 +18,7 @@ let OrderItem = class OrderItem {
     quantity;
     description;
     order;
+    price;
 };
 exports.OrderItem = OrderItem;
 __decorate([
@@ -41,6 +42,10 @@ __decorate([
     (0, typeorm_1.JoinColumn)({ name: 'orderId' }),
     __metadata("design:type", order_entity_1.Order)
 ], OrderItem.prototype, "order", void 0);
+__decorate([
+    (0, typeorm_1.Column)('decimal', { precision: 10, scale: 2 }),
+    __metadata("design:type", Number)
+], OrderItem.prototype, "price", void 0);
 exports.OrderItem = OrderItem = __decorate([
     (0, typeorm_1.Entity)()
 ], OrderItem);

@@ -30,6 +30,9 @@ let ProductsService = class ProductsService {
         if (!product) {
             throw new common_1.NotFoundException(`Product with id ${id} not found`);
         }
+        if (product.salePrice !== null && product.salePrice !== undefined) {
+            product.salePrice = Number(product.salePrice);
+        }
         return product;
     }
     create(createProductDto) {

@@ -5,4 +5,5 @@ export declare class OrderItem {
     quantity: number;
     description: string;
     order: Order;
+    price: number;
 }
