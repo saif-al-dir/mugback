@@ -24,4 +24,8 @@ export class OrderItem {
   @ManyToOne(() => Order, (order) => order.items, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'orderId' })
   order: Order;
+
+
+  @Column('decimal', { precision: 10, scale: 2 })
+  price: number; // snapshot of salePrice ?? price at order time
 }

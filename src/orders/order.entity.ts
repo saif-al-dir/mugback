@@ -20,7 +20,10 @@ export class Order {
     address: string;
   };
 
-  @OneToMany(() => OrderItem, (item) => item.order, { cascade: true, eager: true })
+  @OneToMany(() => OrderItem, (item) => item.order, {
+    cascade: true,
+    eager: true,
+  })
   items: OrderItem[];
 
   @Column('decimal', { precision: 10, scale: 2 })

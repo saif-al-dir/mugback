@@ -21,15 +21,21 @@ export class ProductsService {
     if (!product) {
       throw new NotFoundException(`Product with id ${id} not found`);
     }
+    if (product.salePrice !== null && product.salePrice !== undefined) {
+      product.salePrice = Number(product.salePrice); // ensure number type
+    }
     return product;
   }
 
- create(createProductDto: CreateProductDto): Promise<Product> {
+  create(createProductDto: CreateProductDto): Promise<Product> {
     const product = this.productsRepository.create(createProductDto);
     return this.productsRepository.save(product);
   }
 
-  async update(id: number, updateProductDto: UpdateProductDto): Promise<Product> {
+  async update(
+    id: number,
+    updateProductDto: UpdateProductDto,
+  ): Promise<Product> {
     const product = await this.findOne(id);
     Object.assign(product, updateProductDto);
     return this.productsRepository.save(product);
@@ -41,3 +47,4 @@ export class ProductsService {
     }
   }
 }
+
